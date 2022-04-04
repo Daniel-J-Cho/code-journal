@@ -13,12 +13,46 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+
 </head>
 <body>
-  <header>
-  </header>
-  <main>
-  </main>
+  <div class="container" data-view="entry-form">
+    <form class="form">
+      <header>
+        <div class="row">
+          <h3 class="column-full">Code Journal</h3>
+          <h1 class="column-full">New Entry</h1>
+        </div>
+      </header>
+      <main>
+        <div class="row">
+          <div class="column-half">
+            <img src="/images/placeholder-image-square.jpg" class="image">
+          </div>
+          <div class="column-half">
+            <div>
+              <label for="title">Title</label>
+            </div>
+            <input type="text" name="title" id="title" class="title-input" required>
+            <div>
+              <label for="photo">Photo URL</label>
+            </div>
+            <input type="text" name="photo" id="photo" class="photo-input" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column-full">
+            <label for="notes">Notes</label>
+            <textarea name="notes" class="textarea" required></textarea>
+            <button type="submit">SAVE</button>
+          </div>
+        </div>
+      </main>
+    </form>
+  </div>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
