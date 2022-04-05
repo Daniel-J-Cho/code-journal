@@ -22,13 +22,3 @@ $form.addEventListener('submit', function (event) {
   $image.setAttribute('src', '/images/placeholder-image-square.jpg');
   event.target.reset();
 });
-
-var newObjEntries = localStorage.getItem('js-local-storage');
-if (newObjEntries !== null) {
-  data.entries = JSON.parse(newObjEntries);
-}
-
-window.addEventListener('beforeunload', function (event) {
-  var dataEntries = JSON.stringify(data.entries);
-  localStorage.setItem('js-local-storage', dataEntries);
-});
