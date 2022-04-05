@@ -7,8 +7,7 @@ var $form = document.querySelector('.form');
 
 $photoInput.addEventListener('input', function (event) {
   var newInput = event.target.value;
-  var previewImg = $image.setAttribute('src', newInput);
-  return previewImg;
+  $image.setAttribute('src', newInput);
 });
 
 $form.addEventListener('submit', function (event) {
