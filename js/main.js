@@ -21,7 +21,15 @@ $form.addEventListener('submit', function (event) {
   data.nextEntryId++;
   data.entries.unshift(newObj);
   $image.setAttribute('src', '/images/placeholder-image-square.jpg');
-  event.target.elements.title.value = '';
-  event.target.elements.photo.value = '';
-  event.target.elements.notes.value = '';
+  event.target.reset();
+});
+
+var newObjEntries = localStorage.getItem('js-local-storage');
+if (newObjEntries !== null) {
+  data.entries = JSON.parse(newObjEntries);
+}
+
+window.addEventListener('beforeunload', function (event) {
+  var dataEntries = JSON.stringify(data.entries);
+  localStorage.setItem('js-local-storage', dataEntries);
 });
