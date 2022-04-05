@@ -13,9 +13,32 @@
   flex-wrap: wrap;
 }
 
+header {
+  width: 100%;
+}
+
+.label {
+  margin-bottom: 1rem;
+}
+
+.label.top-marg {
+  margin-top: 1rem;
+}
+
 .column-full,
 .column-half {
   width: 100%;
+}
+
+.button {
+  text-align: right;
+  margin-bottom: 1rem;
+}
+
+.text-input,
+.photo-input,
+.textarea {
+  margin-bottom: 1rem;
 }
 
 @media screen and (min-width: 768px) {
