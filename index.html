@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
 
 </head>
 <body>
@@ -33,11 +33,11 @@
             <img src="/images/placeholder-image-square.jpg" class="image">
           </div>
           <div class="column-half">
-            <div>
+            <div class="label">
               <label for="title">Title</label>
             </div>
             <input type="text" name="title" id="title" class="title-input" required>
-            <div>
+            <div class="label top-marg">
               <label for="photo">Photo URL</label>
             </div>
             <input type="text" name="photo" id="photo" class="photo-input" required>
@@ -45,9 +45,13 @@
         </div>
         <div class="row">
           <div class="column-full">
-            <label for="notes">Notes</label>
+            <div class="label top-marg">
+              <label for="notes">Notes</label>
+            </div>
             <textarea name="notes" class="textarea" required></textarea>
-            <button type="submit">SAVE</button>
+            <div class="button">
+              <button type="submit">SAVE</button>
+            </div>
           </div>
         </div>
       </main>

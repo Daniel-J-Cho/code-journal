@@ -30,6 +30,11 @@ header {
   width: 100%;
 }
 
+.button {
+  text-align: right;
+  margin-bottom: 1rem;
+}
+
 .text-input,
 .photo-input,
 .textarea {
