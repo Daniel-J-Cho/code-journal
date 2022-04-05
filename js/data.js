@@ -7,9 +7,9 @@ var data = {
   nextEntryId: 1
 };
 
-var newObjEntries = localStorage.getItem('js-local-storage');
-if (newObjEntries !== null) {
-  data.entries = JSON.parse(newObjEntries);
+var newObject = localStorage.getItem('js-local-storage');
+if (newObject !== null) {
+  data = JSON.parse(newObject);
 }
 
 window.addEventListener('beforeunload', function (event) {
