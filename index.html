@@ -20,20 +20,20 @@
 </head>
 <body>
   <div class="container">
-    <div data-view="entry-form">
+    <header>
+      <div class="row">
+        <div class="column-full header">
+          <h3>Code Journal</h3>
+          <h4><a href="#" class="anchor">Entries</a></h4>
+        </div>
+      </div>
+    </header>
+    <div class="entry-form" data-view="entry-form">
       <form class="form">
-        <header>
-          <div class="row">
-            <div class="column-full header">
-              <h3>Code Journal</h3>
-              <h4><a href="#entries">Entries</a></h4>
-            </div>
-            <div class="column-full">
-              <h1 class="column-full">New Entry</h1>
-            </div>
-          </div>
-        </header>
         <main>
+          <div class="column-full">
+            <h1 class="column-full">New Entry</h1>
+          </div>
           <div class="row">
             <div class="column-half">
               <img src="/images/placeholder-image-square.jpg" class="image">
@@ -56,22 +56,18 @@
               </div>
               <textarea name="notes" class="textarea" required></textarea>
               <div class="button">
-                <button type="submit">SAVE</button>
+                <button type="submit" class="submit-button">SAVE</button>
               </div>
             </div>
           </div>
         </main>
       </form>
     </div>
-    <div data-view="entries">
+    <div class="entries hidden" data-view="entries">
       <div class="row">
-        <div class="column-full header">
-          <h3>Code Journal</h3>
-          <h4><a href="#entries">Entries</a></h4>
-        </div>
-        <div class="column-full">
-          <h1 class="column-full">Entries</h1>
-          <button type="button"><a href="#entry-form">NEW</a></button>
+        <div class="column-full title-button">
+          <h1>Entries</h1>
+          <button type="button" class="new-button button-anchor"><a href="#" class="button-anchor">NEW</a></button>
         </div>
       </div>
       <div class="row entries-row">

@@ -39,6 +39,10 @@ header {
   background-color: rgb(77, 0, 128);
 }
 
+.column-full.title-button {
+  display: flex;
+}
+
 .button {
   text-align: right;
   margin-bottom: 1rem;

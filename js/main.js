@@ -4,6 +4,11 @@
 var $photoInput = document.querySelector('.photo-input');
 var $image = document.querySelector('.image');
 var $form = document.querySelector('.form');
+var $ul = document.querySelector('.unordered-list');
+var $anchor = document.querySelector('.anchor');
+var $entryForm = document.querySelector('.entry-form');
+var $entries = document.querySelector('.entries');
+var $buttonAnchor = document.querySelector('.button-anchor');
 
 $photoInput.addEventListener('input', function (event) {
   var newInput = event.target.value;
@@ -19,6 +24,11 @@ $form.addEventListener('submit', function (event) {
   newObj.nextEntryId = data.nextEntryId;
   data.nextEntryId++;
   data.entries.unshift(newObj);
+  $entries.className = 'entries';
+  $entryForm.className = 'entry-form hidden';
+  var listItem = domTree(newObj);
+  $ul.prepend(listItem);
+  $buttonAnchor.className = 'button-anchor';
   $image.setAttribute('src', '/images/placeholder-image-square.jpg');
   event.target.reset();
 });
@@ -60,11 +70,21 @@ function domTree(entry) {
   return liElem;
 }
 
-var $ul = document.querySelector('.unordered-list');
-
 document.addEventListener('DOMContentLoaded', function (event) {
   for (let i = 0; i < data.entries.length; i++) {
     var entry = domTree(data.entries[i]);
     $ul.appendChild(entry);
   }
+});
+
+$anchor.addEventListener('click', function (event) {
+  $entries.className = 'entries';
+  $entryForm.className = 'entry-form hidden';
+  $buttonAnchor = 'button-anchor';
+});
+
+$buttonAnchor.addEventListener('click', function (event) {
+  $buttonAnchor.className = 'button-anchor hidden';
+  $entryForm.className = 'entry-form';
+  $entries.className = 'entries hidden';
 });
