@@ -6,6 +6,12 @@
   background-color: rgb(243, 241, 241);
 }
 
+a {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+}
+
 button {
   width: 60px;
   height: 1.5rem;
@@ -20,6 +26,23 @@ h3 {
   color: white;
   height: 2.5rem;
   line-height: 40px;
+}
+
+h4 {
+  background-color: rgb(77, 0, 128);
+  color: white;
+  height: 2.5rem;
+  margin-left: 1.5rem;
+  padding-top: 0.43rem;
+}
+
+li {
+  list-style: none;
+}
+
+span {
+  color: white;
+  font-size: 1rem;
 }
 
 .image {
