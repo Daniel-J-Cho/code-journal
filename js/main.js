@@ -75,6 +75,14 @@ document.addEventListener('DOMContentLoaded', function (event) {
     var entry = domTree(data.entries[i]);
     $ul.appendChild(entry);
   }
+  if (window.location.hash.slice(1) === $entries.getAttribute('data-view')) {
+    $entries.className = 'entries';
+    $entryForm.className = 'entry-form hidden';
+    $buttonAnchor = 'button-anchor';
+  } else if (window.location.hash.slice(1) === $entryForm.getAttribute('data-view')) {
+    $entryForm.className = 'entry-form';
+    $entries.className = 'entries hidden';
+  }
 });
 
 $anchor.addEventListener('click', function (event) {
