@@ -40,7 +40,10 @@ $form.addEventListener('submit', function (event) {
       <img src="some image" class="image">
     </div>
     <div class="column-half">
-      <h2></h2>
+      <div class="innerDiv">
+        <h2></h2>
+        <i></i>
+      </div>
       <p></p>
     </div>
   </div>
@@ -48,22 +51,28 @@ $form.addEventListener('submit', function (event) {
 
 function domTree(entry) {
   var liElem = document.createElement('li');
-  var innerRowDiv = document.createElement('div');
+  var rowDiv = document.createElement('div');
   var firstColDiv = document.createElement('div');
   var imgElem = document.createElement('img');
   var secondColDiv = document.createElement('div');
   var h2Elem = document.createElement('h2');
+  var innerDiv = document.createElement('div');
   var pElem = document.createElement('p');
-  liElem.appendChild(innerRowDiv);
-  innerRowDiv.appendChild(firstColDiv);
+  var editIcon = document.createElement('i');
+  liElem.appendChild(rowDiv);
+  rowDiv.appendChild(firstColDiv);
   firstColDiv.appendChild(imgElem);
-  innerRowDiv.appendChild(secondColDiv);
-  secondColDiv.appendChild(h2Elem);
+  rowDiv.appendChild(secondColDiv);
+  editIcon.className = 'fas fa-pen';
+  secondColDiv.appendChild(innerDiv);
+  innerDiv.className = 'innerDiv';
+  innerDiv.appendChild(h2Elem);
+  innerDiv.appendChild(editIcon);
   secondColDiv.appendChild(pElem);
-  innerRowDiv.setAttribute('class', 'row entries');
+  rowDiv.setAttribute('class', 'row entries');
   firstColDiv.setAttribute('class', 'column-half');
   imgElem.setAttribute('class', 'image');
-  secondColDiv.setAttribute('class', 'column-half');
+  secondColDiv.setAttribute('class', 'column-half firstInnerColDiv');
   imgElem.setAttribute('src', entry.photo);
   h2Elem.textContent = entry.title;
   pElem.textContent = entry.notes;
