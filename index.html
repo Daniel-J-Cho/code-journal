@@ -19,43 +19,62 @@
 
 </head>
 <body>
-  <div class="container" data-view="entry-form">
-    <form class="form">
-      <header>
-        <div class="row">
-          <h3 class="column-full">Code Journal</h3>
-          <h1 class="column-full">New Entry</h1>
+  <div class="container">
+    <header>
+      <div class="row">
+        <div class="column-full header">
+          <h3>Code Journal</h3>
+          <h4><a href="#entries" class="anchor">Entries</a></h4>
         </div>
-      </header>
-      <main>
-        <div class="row">
-          <div class="column-half">
-            <img src="/images/placeholder-image-square.jpg" class="image">
-          </div>
-          <div class="column-half">
-            <div class="label">
-              <label for="title">Title</label>
-            </div>
-            <input type="text" name="title" id="title" class="title-input" required>
-            <div class="label top-marg">
-              <label for="photo">Photo URL</label>
-            </div>
-            <input type="text" name="photo" id="photo" class="photo-input" required>
-          </div>
-        </div>
-        <div class="row">
+      </div>
+    </header>
+    <div class="entry-form" data-view="entry-form">
+      <form class="form">
+        <main>
           <div class="column-full">
-            <div class="label top-marg">
-              <label for="notes">Notes</label>
+            <h1 class="column-full">New Entry</h1>
+          </div>
+          <div class="row">
+            <div class="column-half">
+              <img src="/images/placeholder-image-square.jpg" class="image">
             </div>
-            <textarea name="notes" class="textarea" required></textarea>
-            <div class="button">
-              <button type="submit">SAVE</button>
+            <div class="column-half">
+              <div class="label">
+                <label for="title">Title</label>
+              </div>
+              <input type="text" name="title" id="title" class="title-input" required>
+              <div class="label top-marg">
+                <label for="photo">Photo URL</label>
+              </div>
+              <input type="text" name="photo" id="photo" class="photo-input" required>
             </div>
           </div>
+          <div class="row">
+            <div class="column-full">
+              <div class="label top-marg">
+                <label for="notes">Notes</label>
+              </div>
+              <textarea name="notes" class="textarea" required></textarea>
+              <div class="button">
+                <button type="submit" class="submit-button">SAVE</button>
+              </div>
+            </div>
+          </div>
+        </main>
+      </form>
+    </div>
+    <div class="entries hidden" data-view="entries">
+      <div class="row">
+        <div class="column-full title-button">
+          <h1>Entries</h1>
+          <button type="button" class="new-button button-anchor"><a href="#entry-form" class="button-anchor">NEW</a></button>
         </div>
-      </main>
-    </form>
+      </div>
+      <div class="row entries-row">
+        <ul class="unordered-list">
+        </ul>
+      </div>
+    </div>
   </div>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

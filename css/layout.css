@@ -13,6 +13,10 @@
   flex-wrap: wrap;
 }
 
+.entries {
+  padding-bottom: 2rem;
+}
+
 header {
   width: 100%;
 }
@@ -28,6 +32,16 @@ header {
 .column-full,
 .column-half {
   width: 100%;
+}
+
+.column-full.header {
+  display: flex;
+  background-color: rgb(77, 0, 128);
+}
+
+.column-full.title-button {
+  display: flex;
+  justify-content: space-between;
 }
 
 .button {
