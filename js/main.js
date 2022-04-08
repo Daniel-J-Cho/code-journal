@@ -12,6 +12,7 @@ var $anchor = document.querySelector('.anchor');
 var $entryForm = document.querySelector('.entry-form');
 var $entries = document.querySelector('.entries');
 var $buttonAnchor = document.querySelector('.button-anchor');
+var $liNodeList = document.querySelectorAll('.li-item');
 
 $photoInput.addEventListener('input', function (event) {
   var newInput = event.target.value;
@@ -20,20 +21,54 @@ $photoInput.addEventListener('input', function (event) {
 
 $form.addEventListener('submit', function (event) {
   event.preventDefault();
-  var newObj = {};
-  newObj.title = event.target.elements.title.value;
-  newObj.photo = event.target.elements.photo.value;
-  newObj.notes = event.target.elements.notes.value;
-  newObj.nextEntryId = data.nextEntryId;
-  data.nextEntryId++;
-  data.entries.unshift(newObj);
-  $entries.className = 'entries';
-  $entryForm.className = 'entry-form hidden';
-  var listItem = domTree(newObj);
-  $ul.prepend(listItem);
-  $buttonAnchor.className = 'button-anchor';
-  $image.setAttribute('src', '/images/placeholder-image-square.jpg');
-  event.target.reset();
+  if (data.editing === null) {
+    var newObj = {};
+    newObj.title = event.target.elements.title.value;
+    newObj.photo = event.target.elements.photo.value;
+    newObj.notes = event.target.elements.notes.value;
+    newObj.entryId = data.nextEntryId;
+    data.nextEntryId++;
+    data.entries.unshift(newObj);
+    $entries.className = 'entries';
+    $entryForm.className = 'entry-form hidden';
+    var listItem = domTree(newObj);
+    $ul.prepend(listItem);
+    $buttonAnchor.className = 'button-anchor';
+    $image.setAttribute('src', '/images/placeholder-image-square.jpg');
+    event.target.reset();
+  } else {
+    var editedObj = {
+      title: event.target.elements.title.value,
+      photo: event.target.elements.photo.value,
+      notes: event.target.elements.notes.value,
+      entryId: data.editing.entryId
+    };
+    $entries.className = 'entries';
+    $entryForm.className = 'entry-form hidden';
+    var editItem = domTree(editedObj);
+    // grab every li element and set it to variable
+    for (var i = 0; i < data.entries.length; i++) {
+      if (editedObj.entryId === data.entries[i].nextEntryId) {
+        $liNodeList[i].replaceWith(editItem);
+      }
+    }
+
+    // for loop and loop through data.entries
+    // get access to index and get attribute assign it to a variable
+    // comparison check (condition) check editedObj.entryId === li variable
+    // replaceWith method
+    // update data.entries in localStorage
+    data.editing = null;
+    //   console.log('data.editing:', data.editing);
+    //   $entries.className = 'entries';
+    //   $entryForm.className = 'entry-form hidden';
+    //   listItem = domTree(data.editing);
+
+  //   $buttonAnchor.className = 'button-anchor';
+  //   $image.setAttribute('src', '/images/placeholder-image-square.jpg');
+  //   event.target.reset();
+  // }
+  }
 });
 
 /* Structure of domTree
@@ -68,11 +103,12 @@ function domTree(entry) {
   var editIcon = document.createElement('i');
   var editAnchor = document.createElement('a');
   liElem.appendChild(rowDiv);
+  liElem.className = 'li-item';
   rowDiv.appendChild(firstColDiv);
   firstColDiv.appendChild(imgElem);
   rowDiv.appendChild(secondColDiv);
   editIcon.className = 'fas fa-pen';
-  editIcon.setAttribute('data-entry-id', entry.nextEntryId);
+  editIcon.setAttribute('data-entry-id', entry.entryId);
   secondColDiv.appendChild(innerDiv);
   innerDiv.className = 'inner-div';
   innerDiv.appendChild(h2Elem);
@@ -130,7 +166,7 @@ $ul.addEventListener('click', function (event) {
     var nextEntryIdString = event.target.getAttribute('data-entry-id');
     var nextEntryIdNum = parseInt(nextEntryIdString, 10);
     for (var j = 0; j < data.entries.length; j++) {
-      if (nextEntryIdNum === data.entries[j].nextEntryId) {
+      if (nextEntryIdNum === data.entries[j].entryId) {
         data.editing = data.entries[j];
       }
     }
