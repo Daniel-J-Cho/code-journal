@@ -51,9 +51,9 @@ $form.addEventListener('submit', function (event) {
     for (var i = 0; i < $liNodeList.length; i++) {
       if (indexEntryId === $liNodeList[i].closest('li').getAttribute('data-entry-id')) {
         $liNodeList[i].replaceWith(editItem);
+        data.entries[i] = editedObj;
       }
     }
-    // update data.entries in localStorage
     window.location.hash = '#entries';
     $buttonAnchor.className = 'button-anchor';
     $image.setAttribute('src', '/images/placeholder-image-square.jpg');
