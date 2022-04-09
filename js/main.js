@@ -133,6 +133,16 @@ document.addEventListener('DOMContentLoaded', function (event) {
   } else if (window.location.hash.slice(1) === $entryForm.getAttribute('data-view')) {
     $entryForm.className = 'entry-form';
     $entries.className = 'entries hidden';
+    if (data.editing !== null) {
+      $titleInput.value = data.editing.title;
+      $photoInput.value = data.editing.photo;
+      $image.setAttribute('src', data.editing.photo);
+      $textArea.value = data.editing.notes;
+      $entryFormh1.textContent = 'Edit Entry';
+    } else if (data.editing === null) {
+      $entryForm.className = 'entry-form';
+      $entries.className = 'entries hidden';
+    }
   }
 });
 
@@ -143,6 +153,7 @@ $anchor.addEventListener('click', function (event) {
 });
 
 $buttonAnchor.addEventListener('click', function (event) {
+  data.editing = null;
   $buttonAnchor.className = 'button-anchor hidden';
   $entryForm.className = 'entry-form';
   $entries.className = 'entries hidden';

@@ -49,15 +49,6 @@ header {
   justify-content: space-between;
 }
 
-/* .firstInnerColDiv {
-  display: flex;
-  justify-content: space-around;
-} */
-
-/* .secondInnerColDiv {
-  display: flex;
-} */
-
 .button {
   text-align: right;
   margin-bottom: 1rem;
