@@ -21,6 +21,12 @@ button {
   border-radius: 0.25rem;
 }
 
+.delete-link {
+  width: 9rem;
+  color: red;
+  text-decoration: underline;
+}
+
 .new-button {
   height: 2rem;
   margin-top: 28px;

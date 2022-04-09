@@ -49,8 +49,15 @@ header {
   justify-content: space-between;
 }
 
-.button {
-  text-align: right;
+.button-div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.new-entry-mode {
+  display: flex;
+  justify-content: flex-end;
   margin-bottom: 1rem;
 }
 
