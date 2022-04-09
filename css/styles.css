@@ -26,6 +26,11 @@ button {
   margin-top: 28px;
 }
 
+.fas.fa-pen {
+  padding-top: 25px;
+  color: rgb(77, 0, 128);
+}
+
 h3 {
   background-color: rgb(77, 0, 128);
   color: white;

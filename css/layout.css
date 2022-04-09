@@ -44,6 +44,11 @@ header {
   justify-content: space-between;
 }
 
+.inner-div {
+  display: flex;
+  justify-content: space-between;
+}
+
 .button {
   text-align: right;
   margin-bottom: 1rem;

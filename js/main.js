@@ -1,7 +1,10 @@
 /* global data */
 /* exported data */
 
+var $entryFormh1 = document.querySelector('.entry-form-h1');
+var $titleInput = document.querySelector('.title-input');
 var $photoInput = document.querySelector('.photo-input');
+var $textArea = document.querySelector('.textarea');
 var $image = document.querySelector('.image');
 var $form = document.querySelector('.form');
 var $ul = document.querySelector('.unordered-list');
@@ -17,20 +20,46 @@ $photoInput.addEventListener('input', function (event) {
 
 $form.addEventListener('submit', function (event) {
   event.preventDefault();
-  var newObj = {};
-  newObj.title = event.target.elements.title.value;
-  newObj.photo = event.target.elements.photo.value;
-  newObj.notes = event.target.elements.notes.value;
-  newObj.nextEntryId = data.nextEntryId;
-  data.nextEntryId++;
-  data.entries.unshift(newObj);
-  $entries.className = 'entries';
-  $entryForm.className = 'entry-form hidden';
-  var listItem = domTree(newObj);
-  $ul.prepend(listItem);
-  $buttonAnchor.className = 'button-anchor';
-  $image.setAttribute('src', '/images/placeholder-image-square.jpg');
-  event.target.reset();
+  if (data.editing === null) {
+    var newObj = {};
+    newObj.title = event.target.elements.title.value;
+    newObj.photo = event.target.elements.photo.value;
+    newObj.notes = event.target.elements.notes.value;
+    newObj.entryId = data.nextEntryId;
+    data.nextEntryId++;
+    data.entries.unshift(newObj);
+    $entries.className = 'entries';
+    $entryForm.className = 'entry-form hidden';
+    var listItem = domTree(newObj);
+    $ul.prepend(listItem);
+    $buttonAnchor.className = 'button-anchor';
+    window.location.hash = '#entries';
+    $image.setAttribute('src', '/images/placeholder-image-square.jpg');
+    event.target.reset();
+  } else {
+    var editedObj = {
+      title: event.target.elements.title.value,
+      photo: event.target.elements.photo.value,
+      notes: event.target.elements.notes.value,
+      entryId: data.editing.entryId
+    };
+    var $liNodeList = document.querySelectorAll('.li-item');
+    $entries.className = 'entries';
+    $entryForm.className = 'entry-form hidden';
+    var editItem = domTree(editedObj);
+    var indexEntryId = editItem.getAttribute('data-entry-id');
+    for (var i = 0; i < $liNodeList.length; i++) {
+      if (indexEntryId === $liNodeList[i].closest('li').getAttribute('data-entry-id')) {
+        $liNodeList[i].replaceWith(editItem);
+        data.entries[i] = editedObj;
+      }
+    }
+    window.location.hash = '#entries';
+    $buttonAnchor.className = 'button-anchor';
+    $image.setAttribute('src', '/images/placeholder-image-square.jpg');
+    event.target.reset();
+    data.editing = null;
+  }
 });
 
 /* Structure of domTree
@@ -40,7 +69,13 @@ $form.addEventListener('submit', function (event) {
       <img src="some image" class="image">
     </div>
     <div class="column-half">
-      <h2></h2>
+      <div class="inner-div">
+        <h2></h2>
+        <div class="second-inner-div">
+        <a></a>
+          <i></i>
+        </div>
+      </div>
       <p></p>
     </div>
   </div>
@@ -48,22 +83,38 @@ $form.addEventListener('submit', function (event) {
 
 function domTree(entry) {
   var liElem = document.createElement('li');
-  var innerRowDiv = document.createElement('div');
+  var rowDiv = document.createElement('div');
   var firstColDiv = document.createElement('div');
   var imgElem = document.createElement('img');
   var secondColDiv = document.createElement('div');
+  var innerDiv = document.createElement('div');
   var h2Elem = document.createElement('h2');
+  var secondInnerDiv = document.createElement('div');
   var pElem = document.createElement('p');
-  liElem.appendChild(innerRowDiv);
-  innerRowDiv.appendChild(firstColDiv);
+  var editIcon = document.createElement('i');
+  var editAnchor = document.createElement('a');
+  liElem.appendChild(rowDiv);
+  liElem.className = 'li-item';
+  liElem.setAttribute('data-entry-id', entry.entryId);
+  rowDiv.appendChild(firstColDiv);
   firstColDiv.appendChild(imgElem);
-  innerRowDiv.appendChild(secondColDiv);
-  secondColDiv.appendChild(h2Elem);
+  rowDiv.appendChild(secondColDiv);
+  editIcon.className = 'fas fa-pen';
+  editIcon.setAttribute('data-entry-id', entry.entryId);
+  secondColDiv.appendChild(innerDiv);
+  innerDiv.className = 'inner-div';
+  innerDiv.appendChild(h2Elem);
+  innerDiv.appendChild(secondInnerDiv);
+  secondInnerDiv.className = 'second-inner-div';
+  secondInnerDiv.appendChild(editAnchor);
+  editAnchor.appendChild(editIcon);
+  editAnchor.setAttribute('href', '#entry-form');
+  editAnchor.setAttribute('class', 'edit-icon-anchor');
   secondColDiv.appendChild(pElem);
-  innerRowDiv.setAttribute('class', 'row entries');
+  rowDiv.setAttribute('class', 'row entries');
   firstColDiv.setAttribute('class', 'column-half');
   imgElem.setAttribute('class', 'image');
-  secondColDiv.setAttribute('class', 'column-half');
+  secondColDiv.setAttribute('class', 'column-half firstInnerColDiv');
   imgElem.setAttribute('src', entry.photo);
   h2Elem.textContent = entry.title;
   pElem.textContent = entry.notes;
@@ -82,6 +133,16 @@ document.addEventListener('DOMContentLoaded', function (event) {
   } else if (window.location.hash.slice(1) === $entryForm.getAttribute('data-view')) {
     $entryForm.className = 'entry-form';
     $entries.className = 'entries hidden';
+    if (data.editing !== null) {
+      $titleInput.value = data.editing.title;
+      $photoInput.value = data.editing.photo;
+      $image.setAttribute('src', data.editing.photo);
+      $textArea.value = data.editing.notes;
+      $entryFormh1.textContent = 'Edit Entry';
+    } else if (data.editing === null) {
+      $entryForm.className = 'entry-form';
+      $entries.className = 'entries hidden';
+    }
   }
 });
 
@@ -92,7 +153,33 @@ $anchor.addEventListener('click', function (event) {
 });
 
 $buttonAnchor.addEventListener('click', function (event) {
+  data.editing = null;
   $buttonAnchor.className = 'button-anchor hidden';
   $entryForm.className = 'entry-form';
   $entries.className = 'entries hidden';
+  $entryFormh1.textContent = 'New Entry';
+  $image.setAttribute('src', '/images/placeholder-image-square.jpg');
+  $form.reset();
+});
+
+$ul.addEventListener('click', function (event) {
+  if (event.target.matches('i')) {
+    $entryForm.className = 'entry-form';
+    $entries.className = 'entries hidden';
+    var nextEntryIdString = event.target.getAttribute('data-entry-id');
+    var nextEntryIdNum = parseInt(nextEntryIdString, 10);
+    for (var j = 0; j < data.entries.length; j++) {
+      if (nextEntryIdNum === data.entries[j].entryId) {
+        data.editing = data.entries[j];
+      }
+    }
+    $entryFormh1.textContent = 'Edit Entry';
+    $titleInput.value = data.editing.title;
+    $photoInput.value = data.editing.photo;
+    $image.setAttribute('src', data.editing.photo);
+    $textArea.value = data.editing.notes;
+  } else {
+    $entries.className = 'entries';
+    $entryForm.className = 'entry-form hidden';
+  }
 });
