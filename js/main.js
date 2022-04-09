@@ -33,6 +33,7 @@ $form.addEventListener('submit', function (event) {
     var listItem = domTree(newObj);
     $ul.prepend(listItem);
     $buttonAnchor.className = 'button-anchor';
+    window.location.hash = '#entries';
     $image.setAttribute('src', '/images/placeholder-image-square.jpg');
     event.target.reset();
   } else {
@@ -52,12 +53,8 @@ $form.addEventListener('submit', function (event) {
         $liNodeList[i].replaceWith(editItem);
       }
     }
-    // grab every li element and set it to variable
-    // for loop and loop through data.entries
-    // get access to index and get attribute assign it to a variable
-    // comparison check (condition) check editedObj.entryId === li variable
-    // replaceWith method
     // update data.entries in localStorage
+    window.location.hash = '#entries';
     $buttonAnchor.className = 'button-anchor';
     $image.setAttribute('src', '/images/placeholder-image-square.jpg');
     event.target.reset();
