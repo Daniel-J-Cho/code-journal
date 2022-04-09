@@ -12,7 +12,6 @@ var $anchor = document.querySelector('.anchor');
 var $entryForm = document.querySelector('.entry-form');
 var $entries = document.querySelector('.entries');
 var $buttonAnchor = document.querySelector('.button-anchor');
-var $liNodeList = document.querySelectorAll('.li-item');
 
 $photoInput.addEventListener('input', function (event) {
   var newInput = event.target.value;
@@ -43,31 +42,26 @@ $form.addEventListener('submit', function (event) {
       notes: event.target.elements.notes.value,
       entryId: data.editing.entryId
     };
+    var $liNodeList = document.querySelectorAll('.li-item');
     $entries.className = 'entries';
     $entryForm.className = 'entry-form hidden';
     var editItem = domTree(editedObj);
-    // grab every li element and set it to variable
-    for (var i = 0; i < data.entries.length; i++) {
-      if (editedObj.entryId === data.entries[i].nextEntryId) {
+    var indexEntryId = editItem.getAttribute('data-entry-id');
+    for (var i = 0; i < $liNodeList.length; i++) {
+      if (indexEntryId === $liNodeList[i].closest('li').getAttribute('data-entry-id')) {
         $liNodeList[i].replaceWith(editItem);
       }
     }
-
+    // grab every li element and set it to variable
     // for loop and loop through data.entries
     // get access to index and get attribute assign it to a variable
     // comparison check (condition) check editedObj.entryId === li variable
     // replaceWith method
     // update data.entries in localStorage
+    $buttonAnchor.className = 'button-anchor';
+    $image.setAttribute('src', '/images/placeholder-image-square.jpg');
+    event.target.reset();
     data.editing = null;
-    //   console.log('data.editing:', data.editing);
-    //   $entries.className = 'entries';
-    //   $entryForm.className = 'entry-form hidden';
-    //   listItem = domTree(data.editing);
-
-  //   $buttonAnchor.className = 'button-anchor';
-  //   $image.setAttribute('src', '/images/placeholder-image-square.jpg');
-  //   event.target.reset();
-  // }
   }
 });
 
@@ -104,6 +98,7 @@ function domTree(entry) {
   var editAnchor = document.createElement('a');
   liElem.appendChild(rowDiv);
   liElem.className = 'li-item';
+  liElem.setAttribute('data-entry-id', entry.entryId);
   rowDiv.appendChild(firstColDiv);
   firstColDiv.appendChild(imgElem);
   rowDiv.appendChild(secondColDiv);
