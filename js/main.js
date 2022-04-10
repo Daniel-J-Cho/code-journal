@@ -2,6 +2,7 @@
 /* exported data */
 
 var $container = document.getElementById('container');
+var $containerTwo = document.querySelector('.container-two.hidden');
 var $entryFormh1 = document.querySelector('.entry-form-h1');
 var $titleInput = document.querySelector('.title-input');
 var $photoInput = document.querySelector('.photo-input');
@@ -15,7 +16,6 @@ var $entries = document.querySelector('.entries');
 var $buttonAnchor = document.querySelector('.button-anchor');
 var $deleteLink = document.querySelector('.delete-link');
 var $newEntryMode = document.querySelector('.new-entry-mode');
-var $modal = document.querySelector('.modal');
 var $cancelButton = document.querySelector('.cancel-button');
 var $confirmButton = document.querySelector('.confirm-button');
 
@@ -198,16 +198,15 @@ $ul.addEventListener('click', function (event) {
 });
 
 function displayModal(event) {
-  if ($modal.className === 'modal hidden') {
-    $modal.className = 'modal';
-    $container.className = 'container-two';
+  if ($containerTwo.className === 'container-two hidden') {
+    $containerTwo.className = 'container-two';
   }
 }
 
 function hideModal(event) {
-  if ($modal.className === 'modal') {
-    $modal.className = 'modal hidden';
+  if ($containerTwo.className === 'container-two') {
     $container.className = 'container';
+    $containerTwo.className = 'container-two hidden';
   }
 }
 
@@ -225,5 +224,6 @@ $confirmButton.addEventListener('click', function (event) {
   $entries.className = 'entries';
   $entryForm.className = 'entry-form hidden';
   window.location.hash = '#entries';
+  $containerTwo.className = 'container-two hidden';
   hideModal();
 });
