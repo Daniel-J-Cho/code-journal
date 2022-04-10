@@ -17,6 +17,7 @@ var $deleteLink = document.querySelector('.delete-link');
 var $newEntryMode = document.querySelector('.new-entry-mode');
 var $modal = document.querySelector('.modal');
 var $cancelButton = document.querySelector('.cancel-button');
+var $confirmButton = document.querySelector('.confirm-button');
 
 $photoInput.addEventListener('input', function (event) {
   var newInput = event.target.value;
@@ -213,3 +214,16 @@ function hideModal(event) {
 $deleteLink.addEventListener('click', displayModal);
 
 $cancelButton.addEventListener('click', hideModal);
+
+$confirmButton.addEventListener('click', function (event) {
+  // var $liNodeListTwo = document.querySelectorAll('.li-item');
+  // for (let i = 0; i < $liNodeListTwo.length; i++) {
+  //   if (data.editing.entryId === $liNodeListTwo[i].closest('li').getAttribute('data-entry-id')) {
+  //     delete data.entries[i];
+  //   }
+  // }
+  $entries.className = 'entries';
+  $entryForm.className = 'entry-form hidden';
+  window.location.hash = '#entries';
+  hideModal();
+});

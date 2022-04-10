@@ -6,7 +6,8 @@
   background-color: rgb(243, 241, 241);
 }
 
-.container-two {
+.container-two,
+.dark {
   background-color: black;
   background-color: rgba(0 0 0 / 50%);
 }
@@ -26,6 +27,29 @@ button {
   border-radius: 0.25rem;
 }
 
+.cancel-button {
+  margin-top: 10px;
+  margin-right: 40px;
+  width: 100px;
+  height: 40px;
+  background-color: grey;
+  color: black;
+}
+
+.confirm-button {
+  margin-top: 10px;
+  margin-left: 40px;
+  width: 100px;
+  height: 40px;
+  background-color: red;
+}
+
+.delete-buttons {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 20px;
+}
+
 .delete-link {
   width: 9rem;
   color: red;
@@ -33,14 +57,20 @@ button {
 }
 
 .modal {
-  position: absolute;
-  width: 310px;
-  height: 120px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 23rem;
+  height: 9.5rem;
   border-radius: 5px;
-  margin-top: 120px;
-  margin-left: 270px;
-  z-index: 5;
+  z-index: 1;
   background-color: white;
+  text-align: center;
+}
+
+.modal-text-buttons {
+  padding-top: 10px;
 }
 
 .new-button {
