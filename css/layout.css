@@ -49,12 +49,15 @@ header {
   justify-content: space-between;
 }
 
+/* for spacing out delete link and save button */
 .button-div {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
 }
 
+/* for making sure save button stays on right side
+on new entry page */
 .new-entry-mode {
   display: flex;
   justify-content: flex-end;

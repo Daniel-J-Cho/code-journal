@@ -1,6 +1,7 @@
 /* global data */
 /* exported data */
 
+var $container = document.getElementById('container');
 var $entryFormh1 = document.querySelector('.entry-form-h1');
 var $titleInput = document.querySelector('.title-input');
 var $photoInput = document.querySelector('.photo-input');
@@ -14,6 +15,8 @@ var $entries = document.querySelector('.entries');
 var $buttonAnchor = document.querySelector('.button-anchor');
 var $deleteLink = document.querySelector('.delete-link');
 var $newEntryMode = document.querySelector('.new-entry-mode');
+var $modal = document.querySelector('.modal');
+var $cancelButton = document.querySelector('.cancel-button');
 
 $photoInput.addEventListener('input', function (event) {
   var newInput = event.target.value;
@@ -165,6 +168,7 @@ $buttonAnchor.addEventListener('click', function (event) {
   $entryFormh1.textContent = 'New Entry';
   $newEntryMode.setAttribute('class', 'new-entry-mode');
   $image.setAttribute('src', '/images/placeholder-image-square.jpg');
+  window.location.hash = '#entry-form';
   $form.reset();
 });
 
@@ -192,6 +196,20 @@ $ul.addEventListener('click', function (event) {
   }
 });
 
-$deleteLink.addEventListener('click', function (event) {
+function displayModal(event) {
+  if ($modal.className === 'modal hidden') {
+    $modal.className = 'modal';
+    $container.className = 'container-two';
+  }
+}
 
-});
+function hideModal(event) {
+  if ($modal.className === 'modal') {
+    $modal.className = 'modal hidden';
+    $container.className = 'container';
+  }
+}
+
+$deleteLink.addEventListener('click', displayModal);
+
+$cancelButton.addEventListener('click', hideModal);

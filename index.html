@@ -18,7 +18,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
+  <div id="container" class="container">
     <header>
       <div class="row">
         <div class="column-full header">
@@ -73,6 +73,15 @@
       <div class="row entries-row">
         <ul class="unordered-list">
         </ul>
+      </div>
+    </div>
+    <div id="modal" class="modal hidden">
+      <div class="modal-text-buttons">
+        <p>Are you sure you want to delete this entry?</p>
+        <div class="delete-buttons">
+          <button class="cancel-button">Cancel</button>
+          <button class="confirm-button">Confirm</button>
+        </div>
       </div>
     </div>
   </div>
