@@ -215,12 +215,17 @@ $deleteLink.addEventListener('click', displayModal);
 $cancelButton.addEventListener('click', hideModal);
 
 $confirmButton.addEventListener('click', function (event) {
-  // var $liNodeListTwo = document.querySelectorAll('.li-item');
-  // for (let i = 0; i < $liNodeListTwo.length; i++) {
-  //   if (data.editing.entryId === $liNodeListTwo[i].closest('li').getAttribute('data-entry-id')) {
-  //     delete data.entries[i];
-  //   }
-  // }
+
+  var currEntryId = data.editing.entryId;
+  var currEntryNum = parseInt(currEntryId, 10);
+  var $listElems = document.querySelectorAll('.li-item');
+
+  for (let j = 0; j < data.entries.length; j++) {
+    if (currEntryNum === data.entries[j].entryId) {
+      data.entries.splice(j, 1);
+      $listElems[j].remove();
+    }
+  }
   $entries.className = 'entries';
   $entryForm.className = 'entry-form hidden';
   window.location.hash = '#entries';
