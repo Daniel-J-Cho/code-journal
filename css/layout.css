@@ -8,6 +8,12 @@
   padding: 0 1.5rem;
 }
 
+.container-two {
+  max-width: 575px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -49,19 +55,30 @@ header {
   justify-content: space-between;
 }
 
-.button {
-  text-align: right;
+/* for spacing out delete link and save button */
+.button-div {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 1rem;
 }
 
-.text-input,
+/* for making sure 'save' button stays on right side
+on new entry page */
+.new-entry-mode {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.title-input,
 .photo-input,
 .textarea {
   margin-bottom: 1rem;
 }
 
 @media screen and (min-width: 768px) {
-  .container {
+  .container,
+  .container-two {
     max-width: 900px;
   }
 

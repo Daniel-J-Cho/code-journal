@@ -1,6 +1,8 @@
 /* global data */
 /* exported data */
 
+var $container = document.getElementById('container');
+var $containerTwo = document.querySelector('.container-two.hidden');
 var $entryFormh1 = document.querySelector('.entry-form-h1');
 var $titleInput = document.querySelector('.title-input');
 var $photoInput = document.querySelector('.photo-input');
@@ -12,6 +14,10 @@ var $anchor = document.querySelector('.anchor');
 var $entryForm = document.querySelector('.entry-form');
 var $entries = document.querySelector('.entries');
 var $buttonAnchor = document.querySelector('.button-anchor');
+var $deleteLink = document.querySelector('.delete-link');
+var $newEntryMode = document.querySelector('.new-entry-mode');
+var $cancelButton = document.querySelector('.cancel-button');
+var $confirmButton = document.querySelector('.confirm-button');
 
 $photoInput.addEventListener('input', function (event) {
   var newInput = event.target.value;
@@ -139,6 +145,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
       $image.setAttribute('src', data.editing.photo);
       $textArea.value = data.editing.notes;
       $entryFormh1.textContent = 'Edit Entry';
+      $deleteLink.className = 'delete-link';
+      $newEntryMode.setAttribute('class', 'button-div');
     } else if (data.editing === null) {
       $entryForm.className = 'entry-form';
       $entries.className = 'entries hidden';
@@ -155,10 +163,13 @@ $anchor.addEventListener('click', function (event) {
 $buttonAnchor.addEventListener('click', function (event) {
   data.editing = null;
   $buttonAnchor.className = 'button-anchor hidden';
+  $deleteLink.className = 'delete-link hidden';
   $entryForm.className = 'entry-form';
   $entries.className = 'entries hidden';
   $entryFormh1.textContent = 'New Entry';
+  $newEntryMode.setAttribute('class', 'new-entry-mode');
   $image.setAttribute('src', '/images/placeholder-image-square.jpg');
+  window.location.hash = '#entry-form';
   $form.reset();
 });
 
@@ -166,6 +177,7 @@ $ul.addEventListener('click', function (event) {
   if (event.target.matches('i')) {
     $entryForm.className = 'entry-form';
     $entries.className = 'entries hidden';
+    $deleteLink.className = 'delete-link';
     var nextEntryIdString = event.target.getAttribute('data-entry-id');
     var nextEntryIdNum = parseInt(nextEntryIdString, 10);
     for (var j = 0; j < data.entries.length; j++) {
@@ -177,9 +189,46 @@ $ul.addEventListener('click', function (event) {
     $titleInput.value = data.editing.title;
     $photoInput.value = data.editing.photo;
     $image.setAttribute('src', data.editing.photo);
+    $newEntryMode.setAttribute('class', 'button-div');
     $textArea.value = data.editing.notes;
   } else {
     $entries.className = 'entries';
     $entryForm.className = 'entry-form hidden';
   }
+});
+
+function displayModal(event) {
+  if ($containerTwo.className === 'container-two hidden') {
+    $containerTwo.className = 'container-two';
+  }
+}
+
+function hideModal(event) {
+  if ($containerTwo.className === 'container-two') {
+    $container.className = 'container';
+    $containerTwo.className = 'container-two hidden';
+  }
+}
+
+$deleteLink.addEventListener('click', displayModal);
+
+$cancelButton.addEventListener('click', hideModal);
+
+$confirmButton.addEventListener('click', function (event) {
+
+  var currEntryId = data.editing.entryId;
+  var currEntryNum = parseInt(currEntryId, 10);
+  var $listElems = document.querySelectorAll('.li-item');
+
+  for (let j = 0; j < data.entries.length; j++) {
+    if (currEntryNum === data.entries[j].entryId) {
+      data.entries.splice(j, 1);
+      $listElems[j].remove();
+    }
+  }
+  $entries.className = 'entries';
+  $entryForm.className = 'entry-form hidden';
+  window.location.hash = '#entries';
+  $containerTwo.className = 'container-two hidden';
+  hideModal();
 });
